@@ -1,0 +1,45 @@
+<template>
+  <div style="width: auto;">
+  <template if:false={isNotActivated}>
+  <lightning-card title="Available Products" id="test">
+      
+    <p class="slds-p-horizontal_small">
+      <c-available-products-component
+        onproductselection={hanldeProgressValueChange} record-id={recordId}
+      ></c-available-products-component>
+      
+    </p>
+  </lightning-card>
+  </template><template if:true={isNotActivated}>
+  <lightning-card >
+      
+    <p class="slds-p-horizontal_small">
+     As order is activated you cannot add more items!!!
+    </p>
+  </lightning-card>
+  </template>
+  <template if:true={isOrderProductPresent}>
+  <lightning-card>
+  <div class="slds-scrollable" style="height:25rem;width:24rem" >
+  <div style="height: 275px;width: auto;">
+  <lightning-card title="Order Products">
+        <template if:true={selected}>
+        
+     <lightning-datatable
+             key-field="id"
+             data={selected}
+             columns={columns}
+             hide-checkbox-column="true"
+             >
+     </lightning-datatable>
+     <div class="slds-float_right">
+    <lightning-button onclick={handleclick} variant="brand" value="Activate" 
+label="Activate" class="slds-m-right_x-small" if:false={isNotActivated}>></lightning-button>
+</div>
+</template>
+</lightning-card>   
+  </div> </div>  
+ </lightning-card>   
+</template>
+  </div>
+</template>
